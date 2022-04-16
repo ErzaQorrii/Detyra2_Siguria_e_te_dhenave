@@ -11,7 +11,7 @@ def route_encrypt(plain_text="", step_size=4):
 	matrix_representation = []
 	encrypted_text = ""
 
-	# create a matrix from plain text with width = step_size
+	#Krijimi i  matrices  nga plain teksti me gjatesi = step_size
 	for i in range(math.ceil(len(plain_text)/step_size)):
 		matrix_row = []
 		for j in range(step_size):
