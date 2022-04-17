@@ -29,7 +29,49 @@ def route_encrypt(plain_text="", step_size=4):
 		allowed_depth = matrix_width // 2
 	else:
 		allowed_depth = matrix_height // 2
+		
+# Këtu "i" tregon thellësinë në të cilën jemi në matricë
+# Lexojmë matricën normale në formë spirale duke filluar nga këndi i sipërm djathtas
+	for i in range(allowed_depth):
 
+		# Duke zbritur në anën e djathtë
+		for j in range(i, matrix_height-i-1):
+			encrypted_text += matrix_representation[j][matrix_width-i-1]
+
+		# Duke shkuar majtas në anën e poshtme
+		for j in range(matrix_width-i-1, i, -1):
+			encrypted_text += matrix_representation[matrix_height-i-1][j]
+
+		# Duke u ngjitur në anën e majtë
+		for j in range(matrix_height-i-1, i, -1):
+			encrypted_text += matrix_representation[j][i]
+			
+		# Duke shkuar djathtas në anën e sipërme
+		for j in range(i, matrix_width-i-1):
+			encrypted_text += matrix_representation[i][j]
+
+
+	return encrypted_text
+
+def route_decrypt(cipher_text="", step_size=4):
+	"""
+	    Merr tekstin e shifruar si hyrje dhe prodhon tekst të thjeshtë si dalje
+        Zbaton të kundërtën e teknikës së route cipher
+		
+	"""
+
+	idx = 0
+	plain_text = ""
+
+	matrix_width = step_size
+	matrix_height = math.ceil(len(cipher_text)/step_size)
+
+	if matrix_width < matrix_height:
+		allowed_depth = matrix_width // 2
+	else:
+		allowed_depth = matrix_height // 2
+
+	plain_text_matrix = [[0 for i in range(matrix_width)] for j in range(matrix_height)]
 
     '''
     Variabla "i" tregon thellesine ne te cilen jemi ne matrice  
